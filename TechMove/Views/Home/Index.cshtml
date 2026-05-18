@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@* quick summary header *@
+<div class="p-4 mb-4 bg-dark text-white rounded">
+    <h1 class="display-6 fw-bold">TechMove Logistics</h1>
+    <p class="mb-0">Global Logistics Management System — Manage your clients, contracts and service requests from one place.</p>
+</div>
+
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+                
+                <h4 class="card-title">Clients</h4>
+                <p class="card-text text-muted">
+                    Manage your client base. Add new clients, update contact details and view their contracts.
+                </p>
+            </div>
+            <div class="card-footer bg-white border-0 text-center pb-4">
+                <a asp-controller="Clients" asp-action="Index"
+                   class="btn btn-dark me-2">View Clients</a>
+                <a asp-controller="Clients" asp-action="Create"
+                   class="btn btn-outline-dark">+ Add New</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+                
+                <h4 class="card-title">Contracts</h4>
+                <p class="card-text text-muted">
+                    Manage freight contracts and SLAs. Upload signed agreements and track contract status.
+                </p>
+            </div>
+            <div class="card-footer bg-white border-0 text-center pb-4">
+                <a asp-controller="Contracts" asp-action="Index"
+                   class="btn btn-dark me-2">View Contracts</a>
+                <a asp-controller="Contracts" asp-action="Create"
+                   class="btn btn-outline-dark">+ Add New</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+               
+                <h4 class="card-title">Service Requests</h4>
+                <p class="card-text text-muted">
+                    Raise and track service requests linked to active contracts. Costs auto converted to ZAR.
+                </p>
+            </div>
+            <div class="card-footer bg-white border-0 text-center pb-4">
+                <a asp-controller="ServiceRequests" asp-action="Index"
+                   class="btn btn-dark me-2">View Requests</a>
+                <a asp-controller="ServiceRequests" asp-action="Create"
+                   class="btn btn-outline-dark">+ Add New</a>
+            </div>
+        </div>
+    </div>
+
+</div>

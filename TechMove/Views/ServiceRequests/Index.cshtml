@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TechMove.Models.ServiceRequest>
+
+@{
+    ViewData["Title"] = "Service Requests";
+}
+
+
+<h2>Service Requests</h2>
+
+@* show error if no active contracts exist *@
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ New Request</a>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Contract</th>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Cost (USD)</th>
+            <th>Cost (ZAR)</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sr in Model)
+        {
+            <tr>
+                <td>@sr.Contract?.ServiceLevel</td>
+                <td>@sr.Contract?.Client?.Name</td>
+                <td>@sr.Description</td>
+                <td>$@sr.CostUSD.ToString("N2")</td>
+                <td>R @sr.CostZAR.ToString("N2")</td>
+                <td>
+                    @if (sr.Status == "Completed")
+                    {
+                        <span class="badge bg-success">@sr.Status</span>
+                    }
+                    else if (sr.Status == "In Progress")
+                    {
+                        <span class="badge bg-warning text-dark">@sr.Status</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@sr.Status</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@sr.Id" class="btn btn-sm btn-info">View</a>
+                    <a asp-action="Edit" asp-route-id="@sr.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@sr.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿
+@model TechMove.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Edit Service Request";
+}
+
+<h2>Edit Service Request</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="ContractId" class="form-label">Contract</label>
+        <select asp-for="ContractId" asp-items="ViewBag.Contracts" class="form-select"></select>
+        <span asp-validation-for="ContractId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CostUSD" class="form-label">Cost (USD)</label>
+        <input asp-for="CostUSD" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CostZAR" class="form-label">Cost (ZAR)</label>
+        <input asp-for="CostZAR" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" asp-items="ViewBag.StatusOptions" class="form-select"></select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

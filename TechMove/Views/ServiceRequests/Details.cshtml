@@ -1,0 +1,15 @@
+﻿@model TechMove.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Request Details";
+}
+
+<h2>Service Request Details</h2>
+<p><strong>Contract:</strong> @Model.Contract?.ServiceLevel</p>
+<p><strong>Client:</strong> @Model.Contract?.Client?.Name</p>
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Cost (USD):</strong> $@Model.CostUSD.ToString("N2")</p>
+<p><strong>Cost (ZAR):</strong> @($"R {@Model.CostZAR:N2}")</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<a asp-action="Index" class="btn btn-secondary mt-2">Back to Requests</a>

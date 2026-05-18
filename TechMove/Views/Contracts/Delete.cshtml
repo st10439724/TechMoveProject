@@ -1,0 +1,15 @@
+﻿@model TechMove.Models.Contract
+
+@{
+    ViewData["Title"] = "Delete Contract";
+}
+
+<h2>Delete Contract</h2>
+<p>Are you sure you want to delete this contract for <strong>@Model.Client?.Name</strong>?</p>
+<p><strong>Status:</strong> @Model.Status | <strong>Service Level:</strong> @Model.ServiceLevel</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

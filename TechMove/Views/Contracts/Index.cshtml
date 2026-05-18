@@ -1,0 +1,99 @@
+﻿@model IEnumerable<TechMove.Models.Contract>
+
+@{
+    ViewData["Title"] = "Contracts";
+}
+
+<h2>Contracts</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">+ New Contract</a>
+
+@* search and filter section *@
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Search Contracts</h5>
+        <form asp-action="Index" method="get">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="">-- All Statuses --</option>
+                        @foreach (var s in new[] { "Draft", "Active", "Expired", "On Hold" })
+                        {
+                            <option value="@s" selected="@(ViewBag.SelectedStatus == s)">@s</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Start Date From</label>
+                    <input type="date" name="startDate" class="form-control"
+                           value="@ViewBag.StartDate" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">End Date To</label>
+                    <input type="date" name="endDate" class="form-control"
+                           value="@ViewBag.EndDate" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end gap-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a asp-action="Index" class="btn btn-secondary">Clear</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Status</th>
+            <th>Service Level</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center">No contracts found matching your search.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var contract in Model)
+            {
+                <tr>
+                    <td>@contract.Client?.Name</td>
+                    <td>
+                        @if (contract.Status == "Expired")
+                        {
+                            <span class="badge bg-danger">@contract.Status</span>
+                        }
+                        else if (contract.Status == "Active")
+                        {
+                            <span class="badge bg-success">@contract.Status</span>
+                        }
+                        else if (contract.Status == "On Hold")
+                        {
+                            <span class="badge bg-warning text-dark">@contract.Status</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@contract.Status</span>
+                        }
+                    </td>
+                    <td>@contract.ServiceLevel</td>
+                    <td>@contract.StartDate.ToShortDateString()</td>
+                    <td>@contract.EndDate.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@contract.Id" class="btn btn-sm btn-info">View</a>
+                        <a asp-action="Edit" asp-route-id="@contract.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@contract.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

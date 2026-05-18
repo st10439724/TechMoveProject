@@ -1,0 +1,67 @@
+﻿@model TechMove.Models.Contract
+
+@{
+    ViewData["Title"] = "Contract Details";
+}
+
+<h2>Contract Details</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<p><strong>Client:</strong> @Model.Client?.Name</p>
+<p><strong>Status:</strong> @Model.Status</p>
+<p><strong>Service Level:</strong> @Model.ServiceLevel</p>
+<p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
+<p><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</p>
+
+<div class="mb-3">
+    <strong>Signed Agreement:</strong>
+    @if (!string.IsNullOrEmpty(Model.SignedAgreementPath))
+    {
+        <a asp-action="DownloadAgreement" asp-route-id="@Model.Id"
+               class="btn btn-sm btn-outline-primary ms-2">
+            ⬇ Download PDF
+        </a>
+    }
+    else
+    {
+        <span class="text-muted ms-2">No file uploaded yet</span>
+    }
+</div>
+
+<hr />
+<h4>Service Requests</h4>
+
+@if (Model.ServiceRequests != null && Model.ServiceRequests.Any())
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Cost (USD)</th>
+                <th>Cost (ZAR)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sr in Model.ServiceRequests)
+            {
+                <tr>
+                    <td>@sr.Description</td>
+                    <td>@($"${sr.CostUSD:N2}")</td>
+                    <td>@($"R {sr.CostZAR:N2}")</td>
+                    <td>@sr.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No service requests raised against this contract yet.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-2">Back to Contracts</a>
