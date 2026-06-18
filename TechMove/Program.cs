@@ -17,6 +17,8 @@ namespace TechMove
 
 
             builder.Services.AddHttpClient<CurrencyService>();
+            builder.Services.AddHttpClient<ApiService>();
+            builder.Services.AddScoped<ApiService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="TechMove.API/TechMove.API.csproj" Id="b6b9c196-3356-4096-a7c7-f27cbb41cb49" />
   <Project Path="TechMove.Tests/TechMove.Tests.csproj" />
   <Project Path="TechMove/TechMove.csproj" />
 </Solution>

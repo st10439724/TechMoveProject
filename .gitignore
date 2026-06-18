@@ -57,6 +57,11 @@ nunit-*.xml
 [Rr]eleasePS/
 dlldata.c
 
+**/appsettings.json
+**/appsettings.json
+**/appsettings.Development.json
+docker-compose.yml
+
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 

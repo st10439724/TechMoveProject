@@ -1,7 +1,6 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechMove.Models
 {
@@ -12,6 +11,8 @@ namespace TechMove.Models
         // which client does this contract belong to
         [Required]
         public int ClientId { get; set; }
+
+        [ForeignKey("ClientId")]
         public Client? Client { get; set; }
 
         [Required]

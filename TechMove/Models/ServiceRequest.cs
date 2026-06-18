@@ -9,6 +9,7 @@ namespace TechMove.Models
         // ties this request back to the contract it was raised under
         [Required]
         public int ContractId { get; set; }
+
         public Contract? Contract { get; set; }
 
         [Required(ErrorMessage = "Please describe the service request")]
